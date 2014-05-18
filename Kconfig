@@ -1,0 +1,7 @@
+config MULTIDEVFS
+	tristate "Muti-device Multi-tier SAN file system"
+	depends on BLOCK
+	help
+	  Saying Y here includes support for Multidevfs
+
+	  If unsure, say N.

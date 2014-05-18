@@ -38,7 +38,7 @@
  */
 
 static struct dentry *multidevfs_mount(struct file_system_type *fs_type, int flags,
-		const char *device_name. void *data)
+		const char *device_name, void *data)
 {
 	int error;
 	/*
@@ -49,7 +49,7 @@ static struct dentry *multidevfs_mount(struct file_system_type *fs_type, int fla
 }
 
 
-static void multidevfs_kill_super(struct supe_block *sb)
+static void multidevfs_kill_super(struct super_block *sb)
 {
 
 	/*
@@ -68,9 +68,9 @@ static struct file_system_type multidevfs_fs_type = {
 	.name		= "multidevfs",
 	.mount		= multidevfs_mount,
 	.kill_sb	= multidevfs_kill_super,
-	.fs_flags	= FS_REQUIRE_DEV,
+	.fs_flags	= 0//FS_REQUIRE_DEV,
 };
-MODULE_ALIAS_FS("multidevfs");
+//MODULE_ALIAS_FS("fsmultidevfs");
 
 static int __init init_multidevfs_fs(void)
 {
@@ -89,7 +89,7 @@ static int __init init_multidevfs_fs(void)
 	return 0;
 }
 
-static void __exit exdit_multidevfs_fs(void)
+static void __exit exit_multidevfs_fs(void)
 {
 	/*
 	 * Cleanup code goes here
@@ -101,5 +101,5 @@ static void __exit exdit_multidevfs_fs(void)
 module_init(init_multidevfs_fs)
 module_exit(exit_multidevfs_fs)
 
-MODULE_LICENSE("MIT");
+//MODULE_LICENSE("GPL");
 

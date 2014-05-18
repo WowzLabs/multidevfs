@@ -59,9 +59,9 @@ struct multidevfs_header {
  * it currently lacks any block count etc...
  */
 
-struct multidevfs _super_block {
+struct multidevfs_super_block {
 	u8 csum[MULTIDEVFS_CSUM_SIZE];
-	u8 fsid[BTRFS_FSID_SIZE];
+	u8 fsid[MULTIDEVFS_FSID_SIZE];
 	__le64 flags;
 
 	char label[MULTIDEVFS_LABEL_SIZE];
@@ -103,7 +103,7 @@ struct multidevfs_device {
 	u64 total_bytes;
 
 	u64 type;
-}
+};
 
 
 
@@ -125,7 +125,7 @@ struct multidevfs_fs_info {
 	 * stripe hash table
 	 * raid level
 	 */
-}
+};
 
 
 #endif //__MULTIDEVFS_H__
