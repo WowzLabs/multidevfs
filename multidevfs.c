@@ -25,7 +25,7 @@
  * File system initilization code code here.
  */
 
-
+#include <linux/module.h>
 #include "multidevfs.h"
 
 
@@ -70,7 +70,7 @@ static struct file_system_type multidevfs_fs_type = {
 	.kill_sb	= multidevfs_kill_super,
 	.fs_flags	= 0//FS_REQUIRE_DEV,
 };
-//MODULE_ALIAS_FS("fsmultidevfs");
+MODULE_ALIAS_FS("fsmultidevfs");
 
 static int __init init_multidevfs_fs(void)
 {
@@ -101,5 +101,5 @@ static void __exit exit_multidevfs_fs(void)
 module_init(init_multidevfs_fs)
 module_exit(exit_multidevfs_fs)
 
-//MODULE_LICENSE("GPL");
+MODULE_LICENSE("MIT");
 
