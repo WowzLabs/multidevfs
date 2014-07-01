@@ -22,7 +22,7 @@
  */
 
 /*
- * File system operations functions code goes here
+ * File system addressspace operations functions code goes here
  */
 
 #include <linux/module.h>
@@ -30,35 +30,27 @@
 
 #include "multidevfs.h"
 
-const struct file_operations multidevfs_file_operations = {
-	.llseek		= multidevfs_llseek,
-        .read           = multidevfs_read,
-	.write		= multidevfs_write,
-        .aio_read       = generic_file_aio_read,
-        .aio_write      = generic_file_aio_write,
-	.iterate	= multidevfs_iterate,
-	.poll		= multidevfs_poll,
-	.unlocked_ioctl	= multidevfs_unlocked_ioctl,
-        .mmap           = generic_file_mmap,
-	.open		= multidevfs_open,
-	.flush		= multidevfs_flush,
-	.release	= multidevfs_release,
-        .fsync          = noop_fsync,
-	.aio_fsync	= multidevfs_aio_fsync,
-	.fasync		= multidevfs_fasync,
-	.lock		= multidevfs_lock,
-	.readv		= multidevfs_readv,
-	.writev		= multidevfs_writev,
-	.sendfile	= multidevfs_sendfile,
-	.sendpage	= multidevfs_sendpage,
-	
-	.get_unmapped_area	= multidevfs_get_unmapped_area,
+const struct address_space_operations multidevfs_aops = {
+	.writepage	= multidevfs-writepage,
+        .readpage       = multidevfs_readpage,
+	.writepages	= multidevfs_writepages,
+	.set_page_dirty	= multidevfs_set_page_dirty,
+	.readpages	= multidevfs_readpages,
+        .write_begin    = multidevfs_write_begin,
+        .write_end      = multidevfs_write_end,
+	.bmap		= multidevfs_bmap,
+	.invalidatepage	= multidevfs_invalidatepage,
+	.releasepage	= multidevfs_releasepage,
+	.freepage	= multidevfs_freepage,
+	.direct_IO	= multidevfs_direct_IO,
+	.get_xip_page	= multidevfs_get_xip_page,
 
-	.check_flags	= multidevfs_check_flags,
-	.flock		= mutidevfs_flock,
-	.splice_write	= mutidevfs_splice_write,
-	.splice_read	= mutidevfs_splice_read,
-	.setlease	= mutidevfs_setlease,
-	.fallocate	= mutidevfs_fallocate
+	.migratepage	= multidevfs_migratepage,
+	.launder_page	= multidevfs_launder_page,
+
+	.is_partially_uptodate	= multidevfs_is_partially_uptodate,
+	.is_dirty_writeback	= multidevfs_is_dirty_writeback,
+	.error_remove_page	= multidevfs_error_remove_page,
+	.swap_activate		= multidevfs_swap_activate,
+	.swap_deactivate	= multidevfs_swap_deactivate
 };
-
